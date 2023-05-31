@@ -1,0 +1,9 @@
+/* .projects .image-container {
+  max-width: 300px;
+}
+.projects .image-gallery img{
+  width: 100%;
+} */
+.projects .image-gallery img {
+  max-height: 20vh;
+}

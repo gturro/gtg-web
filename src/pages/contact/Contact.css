@@ -1,0 +1,19 @@
+.contact .links {
+  display: flex;
+  gap: 3rem;
+  margin-top: 5%;
+}
+.contact .links > p{
+  margin: 0 10px;
+}
+.moodboard {
+  margin-bottom: 4%;
+}
+
+.links-media {
+  display: flex;
+  gap: 40px;
+  position: absolute;
+  bottom: 2rem;
+  right: 150px;
+}

@@ -1,0 +1,24 @@
+.aboutMe {
+  height: 100%;
+}
+.aboutMe .presentation {
+  margin-top: 2rem;
+  margin-bottom: 8%;
+}
+.aboutMe .techs-container {
+  display: flex;
+  gap: 16%;
+}
+.aboutMe .tech-title {
+  margin: 10px 0px;
+  font-size: 1.2rem;
+  font-family: 'SuisseIntl-Regular';
+}
+.aboutMe .technologies img {
+  height: 30px;
+  width: auto;
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,18 @@
+.project {
+  margin-bottom: 40px;
+}
+.project .title {
+  display: inline-flex;
+  font-family: 'SuisseIntl-Regular';
+  font-size: 30px;
+}
+.project .description {
+  font-family: "SuisseIntl-Mono";
+  font-size: 14px;
+}
+.project .svg-links {
+  margin-left: 10px;
+}
+.project .svg-links img {
+  padding: 0 4px;
+}

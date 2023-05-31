@@ -1,0 +1,21 @@
+#navbar {
+    list-style: none;
+    padding: 0;
+}
+#navbar li {
+    margin: .4rem 0;
+    transition: transform .2s;
+}
+#navbar li a{
+    font-family: 'Monumental';
+    font-size: 1.2rem;
+    color: #A1A1A1;
+    text-decoration: none;
+}
+#navbar li a.active {
+    color: black;
+}
+
+#navbar li a:hover{
+    cursor: pointer;
+}

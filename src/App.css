@@ -1,0 +1,65 @@
+@font-face {
+  font-family: 'Monumental';
+  src: url('./assets/fonts/MonumentExtended-Regular.otf');
+}
+@font-face {
+  font-family: 'SuisseIntl-Mono';
+  src: url('./assets/fonts/SuisseIntlMono-Regular.otf');
+}
+@font-face {
+  font-family: 'SuisseIntl-Regular';
+  src: url('./assets/fonts/SuisseIntl-Regular.otf');
+}
+* {
+  box-sizing: border-box;
+}
+html, body {
+  overflow: hidden;
+}
+.wrapper {
+  display: flex;
+  height: 100%;
+}
+#side {
+  width: 30%;
+  padding: 30px;
+}
+.content {
+  width: 70%;
+  padding: 30px;
+ 
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.content .inner {
+  flex-grow: 1;
+  overflow-y: scroll;
+}
+.page-title {
+  font-family: 'Monumental';
+  font-size: 5rem;
+  color: #000;
+  margin-bottom: 20px;
+}
+.subtitle {
+  font-family: 'SuisseIntl-Regular';
+  font-size: 2rem;
+  color: #000;
+}
+.text-mono {
+  font-family: 'SuisseIntl-Mono';
+  font-size: 1rem;
+  text-decoration: none;
+}
+.logo-bottom {
+  width: 100px;
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+}
+.logo-bottom img{
+  width: 100%;
+}
+

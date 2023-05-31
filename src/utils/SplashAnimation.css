@@ -1,0 +1,15 @@
+#logoSvg {
+  width: 400px;
+  fill: none;
+}
+.svgFilled path{
+  animation: svgWhiteToBlack 1s forwards;
+}
+@keyframes svgWhiteToBlack {
+  from {
+    fill: white;
+  }
+  to {
+    fill:black;
+  }
+}

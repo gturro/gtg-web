@@ -1,0 +1,15 @@
+#experiences {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+#welcome {
+  text-align: left;
+}
+.exp {
+  width: 50%;
+}
+.timeline-event .text-mono {
+  font-size: .8rem;
+}
