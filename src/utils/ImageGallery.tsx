@@ -1,4 +1,4 @@
-import React, { useState, useEffect  } from 'react';
+import React, { useState, useEffect, useRef  } from 'react';
 import Skeleton from '@mui/material/Skeleton';
 import './ImageGallery.css';
 
@@ -13,7 +13,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ folderName }) => {
 /*   const [isModalOpen, setIsModalOpen] = useState(false); */
   const [loadedImageCount, setLoadedImageCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-
+  const galleryRef = useRef<HTMLDivElement>(null);
 
   
 /*   const openModal = () => {
@@ -24,9 +24,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ folderName }) => {
     setIsModalOpen(false);
   }; */
 
-  const handleImageLoad = () => {
-    setLoadedImageCount((prevCount) => prevCount + 1);
-  };
+
 
   useEffect(() => {
     const importImages = async () => {
@@ -66,21 +64,20 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ folderName }) => {
   }, [folderName]);
 
   useEffect(() => {
-    /* setTimeout(() => {
-      setIsLoading(false);
-    }, 4000); */
-    console.log("handling")
-    if (loadedImageCount === images.length) {
-
+    if (loadedImageCount > 0 && loadedImageCount === images.length) {
       setIsLoading(false);
     }
-  }, [loadedImageCount, images.length]);
+  }, [images.length, loadedImageCount]);
 
+  const handleImageLoad = () => {
+    setLoadedImageCount((prevCount) => prevCount + 1);
+  };
 
+  
 
   return (
-    <>
-       <div className="image-gallery">
+    <div className='image-gallery-container'>
+       <div className="image-gallery" ref={galleryRef}>
         {images.map((img, index) => (
           <div key={`image-container-${index}`} className="image-container">
             {isLoading && 
@@ -98,7 +95,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ folderName }) => {
         ))}
       </div>
       {/* <ImageCarouselModal images={images} isOpen={isModalOpen} onClose={closeModal} /> */}
-    </>
+    </div>
   );
 };
 

@@ -5,18 +5,19 @@ import BadgeLogo from "../../utils/BadgeLogo";
 
 interface ProjectProps {
   title: string;
+  github: string;
   badges: string[];
   description: string;
   folderName: string;
 }
 
-function Project({ title, badges, description, folderName }: ProjectProps): JSX.Element {
+function Project({ title, github, badges, description, folderName }: ProjectProps): JSX.Element {
   return (
     <div className="project">
       <span className='title'>
         {title}
         <div className="svg-links">
-          <img src={githubSvg} alt="" />
+          <a href={github} target='_blank'><img src={githubSvg} alt="github-logo" /></a>
         </div>
       </span>
       <div className='tech-badges'>

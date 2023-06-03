@@ -5,8 +5,10 @@
   display: inline-flex;
   font-family: 'SuisseIntl-Regular';
   font-size: 30px;
+  margin-bottom: .5rem;
 }
 .project .description {
+  margin: .5rem 0;
   font-family: "SuisseIntl-Mono";
   font-size: 14px;
 }
@@ -15,4 +17,8 @@
 }
 .project .svg-links img {
   padding: 0 4px;
+}
+.project .tech-badges {
+  display: flex;
+  gap: 10px;
 }

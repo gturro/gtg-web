@@ -1,7 +1,23 @@
+.image-gallery-container {
+  width: 100%; /* Adjust as needed */
+
+}
+
 .image-gallery {
   display: flex;
-  overflow-y:hidden;
+  width: 100%; /* Adjust as needed */
+  overflow-y: scroll;
 }
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 .image-container {
   position: relative;
   width: fit-content;
