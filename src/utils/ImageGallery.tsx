@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef  } from 'react';
 import Skeleton from '@mui/material/Skeleton';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import './ImageGallery.css';
 
 
@@ -13,6 +15,10 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ folderName }) => {
 /*   const [isModalOpen, setIsModalOpen] = useState(false); */
   const [loadedImageCount, setLoadedImageCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [initialClickX, setInitialClickX] = useState(0);
+  const [initialScrollLeft, setInitialScrollLeft] = useState(0);
   const galleryRef = useRef<HTMLDivElement>(null);
 
   
@@ -73,11 +79,103 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ folderName }) => {
     setLoadedImageCount((prevCount) => prevCount + 1);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (galleryRef.current) {
+        setContainerWidth(galleryRef.current.offsetWidth);
+      }
+    };
   
+    window.addEventListener('resize', handleResize);
+    handleResize();
+  
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+    const { scrollLeft } = event.currentTarget;
+    setScrollPosition(scrollLeft);
+  };
+
+  const handleLeftArrowClick = () => {
+    const newPosition = scrollPosition - containerWidth/2;
+    if (newPosition >= 10) {
+      setScrollPosition(newPosition);
+      galleryRef.current?.scrollTo({
+        left: newPosition,
+        behavior: 'smooth',
+      });
+    } else {
+      setScrollPosition(0);
+      galleryRef.current?.scrollTo({
+        left: 0,
+        behavior: 'smooth',
+      });
+    }
+  };
+  
+  const handleRightArrowClick = () => {
+    const newPosition = scrollPosition + containerWidth/2;
+    const maxScrollPosition = galleryRef.current?.scrollWidth ?? 0 - containerWidth;
+    if (galleryRef.current && newPosition <= maxScrollPosition-600) {
+      setScrollPosition(newPosition);
+      galleryRef.current.scrollTo({
+        left: newPosition,
+        behavior: 'smooth',
+      });
+    } else if (galleryRef.current) {
+      setScrollPosition(maxScrollPosition);
+      galleryRef.current.scrollTo({
+        left: maxScrollPosition,
+        behavior: 'smooth',
+      });
+    }
+  };
+  
+  const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setInitialClickX(event.clientX);
+    setInitialScrollLeft(galleryRef.current?.scrollLeft || 0);
+
+    document.body.style.cursor = 'grabbing';
+  };
+  
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    if (initialClickX !== 0 && galleryRef.current) {
+      const dragX = event.clientX - initialClickX;
+      galleryRef.current.scrollLeft = initialScrollLeft - dragX;
+    }
+  };
+  
+  const handleMouseUp = () => {
+    setInitialClickX(0);
+    setInitialScrollLeft(0);
+
+    document.body.style.cursor = 'auto';
+  };
 
   return (
     <div className='image-gallery-container'>
-       <div className="image-gallery" ref={galleryRef}>
+      {scrollPosition > 0 && (
+        <div className="arrow left-arrow" onClick={handleLeftArrowClick}>
+          <ArrowBackIosIcon />
+        </div>
+      )}
+      {galleryRef.current && scrollPosition < galleryRef.current.scrollWidth - galleryRef.current.offsetWidth && (
+        <div className="arrow right-arrow" onClick={handleRightArrowClick}>
+         <ArrowForwardIosIcon />
+        </div>
+      )}
+       <div className="image-gallery" ref={galleryRef} 
+        onScroll={handleScroll}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}>
+       
         {images.map((img, index) => (
           <div key={`image-container-${index}`} className="image-container">
             {isLoading && 
